@@ -1,0 +1,21 @@
+{
+  "name": "react-express-plural",
+  "version": "0.0.0",
+  "description": "react-express-plural",
+  "main": "server.js",
+  "author": {
+    "name": "Cameron Walker-Hebborn"
+  },
+  "dependencies": {
+    "browser-sync": "^2.11.2",
+    "browserify": "^13.0.0",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "guid": "0.0.12",
+    "gulp": "^3.9.1",
+    "gulp-live-server": "0.0.29",
+    "react": "^0.14.8",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
