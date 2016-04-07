@@ -1,4 +1,32 @@
+html {
+    color:darkslategray;
+    background-color: #fffefd;
+}
+
 .strikethrough {
     text-decoration:line-through;
     color:slategrey;
+}
+
+body {
+    padding-top:3rem;
+}
+
+.purchased-false {
+    height:40px;
+    background-color:palevioletred;
+}
+
+.purchased-true {
+    height:40px;
+    background-color:lightgreen;
+}
+
+h1 {
+    text-decoration:underline;
+}
+
+.grocery-addItem {
+    margin-top:1rem;
+    padding-top:1rem;
 }

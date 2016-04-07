@@ -1,16 +1,14 @@
 ﻿var dispatcher = require('./../dispatcher.js');
+var helper = require('./../helpers/RestHelper.js');
 
 function GroceryItemStore() {
-    var items = [{
-        name: "Ice Cream"
-    }, {
-        name: "Waffles"
-    }, {
-        name: "Candy",
-        purchased: true
-    }, {
-        name: "Snacks"
-    }];
+    var items = [];
+
+    helper.get("/api/items")
+    .then(function (data) {
+        items = data;
+        triggerListeners();
+    })
 
     var listeners = [];
 
@@ -21,6 +19,27 @@ function GroceryItemStore() {
     function addGroceryItem(item) {
         items.push(item);
         triggerListeners();
+
+        helper.post("/api/items", item);
+    }
+
+    function deleteGroceryItem(item) {
+        var index = items.indexOf(item);
+        if (index > -1) {
+            items.splice(index, 1);
+        }
+        triggerListeners();
+        helper.remove("/api/items/" + item._id);
+    }
+
+    function setGroceryItemPurchasedState(item, state) {
+        var index = items.indexOf(item);
+        if (index > -1) {
+            items[index].purchased = state;
+        }
+        triggerListeners();
+
+        helper.patch("/api/items/" + item._id, item);
     }
 
     function onChange(listener) {
@@ -39,6 +58,15 @@ function GroceryItemStore() {
             switch (split[1]) {
                 case "add":
                     addGroceryItem(event.payload);
+                    break;
+                case "remove":
+                    deleteGroceryItem(event.payload);
+                    break;
+                case "buy":
+                    setGroceryItemPurchasedState(event.payload, true);
+                    break;
+                case "unbuy":
+                    setGroceryItemPurchasedState(event.payload, false);
                     break;
             }
         }
